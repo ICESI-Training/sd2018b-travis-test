@@ -4,25 +4,27 @@ import connexion
 from gm_analytics import handlers
 
 
-@pytest.fixture(scope='module')
-def client():
-    flask_app = connexion.FlaskApp(__name__)
-    with flask_app.app.test_client() as c:
-        yield c
-
+#@pytest.fixture(scope='module')
+#def client():
+#    flask_app = connexion.FlaskApp(__name__)
+#    with flask_app.app.test_client() as c:
+#        yield c
 
 @pytest.fixture
 def user_info():
     return {'user_info': 'some_info'}
 
 
-def test_get_health(client):
-    # GIVEN ...
-    # WHEN I access to the url ...
-    # THEN ...
-    response = client.get('/health')
-    assert response.status_code == 200
+#def test_get_health(client):
+#    # GIVEN ...
+#    # WHEN I access to the url ...
+#    # THEN ...
+#    response = client.get('/health')
+#    assert response.status_code == 200
 
+def test_get_health():
+    message = handlers.get_health()
+    assert {"message": "OK"} == message
 
 def test_get_user_info(mocker, user_info):
     # GIVEN not query parameters or payload
